@@ -1,1 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>🌤️ Premium Weather Forecast</title>
+    <style>
+        body {
+            font-family: "Segoe UI", sans-serif;
+            background: linear-gradient(to right, #1e1e2f, #2e2e3f);
+            color: #f8f8f8;
+            padding: 2rem;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        h1 {
+            color: gold;
+        }
+
+        input, button {
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 8px;
+            border: none;
+            margin-right: 0.5rem;
+        }
+
+        .card {
+            background: #2c2c3a;
+            padding: 1rem;
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+            margin-top: 1rem;
+        }
+
+        .forecast {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .forecast-day {
+            background: #3a3a4a;
+            padding: 1rem;
+            border-radius: 12px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌤️Weather Forecast</h1>
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter city (e.g. Bengaluru)" required>
+        <button type="submit">🔍 Search</button>
+    </form>
+
+    {% if weather %}
+    <div class="card">
+        <h2>📍 {{ weather.city }}, {{ weather.country }}</h2>
+        <div class="forecast">
+            {% for entry in weather.forecast %}
+                <div class="forecast-day">
+                    <strong>{{ entry.dt_txt }}</strong><br>
+                    🌡 Temp: {{ entry.main.temp }}°C<br>
+                    💧 Humidity: {{ entry.main.humidity }}%<br>
+                    🌬 Wind: {{ entry.wind.speed }} m/s
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+</body>
+</html>
 
